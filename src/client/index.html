@@ -3,57 +3,60 @@
 <head>
     <!-- Meta Properties -->
     <meta charset="UTF-8">
-    <title>Open Agar</title>
+    <title>agar5 (NEW)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <!-- CSS -->
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADl0lEQVRYhcWXT4tcRRTFf1XVfyadzkyczkzDYNohDGFw4UJEXASxJasgYrIUURd+AvFLuBE/QEh2LiSrEMGVI1kK40aUgINMmhimO9hMMv8zXVUu7ns9r+vVm3TPBHLg0Q9e3Tqnbp+6dUt573mVKK2urvLs2vVJYnTykPl16dPudiYTMMG4OrAAXAKWkvfphHgTWAfWVpqtf4AesN/udtxpBZSAC8A7wCfA+wnxFGCCsYfANrAG3APurTRbD9rdzu5xBOqX+YtF32rAm8CXwA1gPkJahAPgAXALuANsFGWjSEAdeA/4Bln1mTGJQ/wH/AB8B3RiInQuRNL7dkL+4SnIARpIBr9GMphD6AENLAKfAx8A5TCgphVzukRNKYxSABx6z5ZzPLaDGMc54FPEoDdDT4QZmAauIIarhjNdLJVYNGVmtKaiFAYxxZRSNIxhuVxhzkRt0gC+ApZXmq3cirPvrYS8Ec5wqVRmRhvKSqEiDBqoKMWcNiyY6Oa6DFxDzB0VUEG225Uw8o1SmbNav3ALKKCsFOe1jmWiCnwEzBYJmAc+BmayAxrGUNcq6tYilJSioaNyLyOFLCdAA28B74YRs1pjokkvRpqJyF9RB5ZWmq3hetKXGpL66RFyY6gqPSH90cTndC5vZcRnOQFpua1kR7+m9USpz7GpqPQLZLZ/Ov888DrBvq8Sd/y4KBBfDwVo4DxSAYeo6aNCc1IUdBoj1SoVWQlHTWq8KFO82dkm4oF95FwfYsc77Cm6JQ/sxeN7ZLKgE+J+osymH5yHfe+L0vhCDLyn53Jnwx7SuIwISFWtIZkY4omzPD+BCAs89Y5dl4t8lPDkBPSB+8Cz7Ogt5+hPKMImcf8Ocqu3Ccd6ti9IBewCvybqDrJRPWvZsAP2vMNS6Gw88Nx7+tbycHAYG/IYuIssdohsrVxDupdFpO8bFvNN59h0jlljmFGaqlIYBQqF854BYtoNO8DGFe4APwK/tbudkdRkBWwnCpeAz5CKNXKi9K2lf+TTcXEA/Iz0h73wo/ni7MjhtwP8jRydi0g7Nm4jGsMW8BPwLfBnu9vJqQ8FeOAp8AfSUDaR0pk2P+PiAHgI3Aa+B/4KU5/iuLa8jpzfV5HmdBkp2RXyldMhW2sX2Wr3kb/zd6B/3G3pOAEgu2QK6WIWEF+k50b6VBLyzYR8HXH89su4GTlkVenKdPAte0880d1Qverb8Wn6jZeC/wHlRxL3oGkL4wAAAABJRU5ErkJggg==" />
     <link rel="stylesheet" href="css/main.css" />
     <!-- Audio -->
     <audio id="split_cell" src="audio/split.mp3"></audio>
     <audio id="spawn_cell" src="audio/spawn.mp3"></audio>
+    
+    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 </head>
 <body>
     <div id="gameAreaWrapper">
         <div id="status"><span class="title">Leaderboard</span></div>
         <div class="chatbox" id="chatbox">
             <ul id="chatList" class="chat-list"></ul>
-            <input id="chatInput" type="text" class="chat-input" placeholder="Chat here..." maxlength="35" />
+            <input id="chatInput" type="text" class="chat-input" placeholder="Press enter to chat..." maxlength="50" />
         </div>
         <div id="mobile">
            <input type="image" id="split" class="split" src="img/split.png" alt="splitBtn">
            <input type="image" id="feed" class="feed" src="img/feed.png" alt="feedBtn">
         </div>
-        <canvas tabindex="1" id="cvs"></canvas>
+        <canvas tabindex="1" id="cvs" style="object-fit: fill !important"></canvas>
     </div>
     <div id="startMenuWrapper">
         <div id="startMenu">
-            <p>Open Agar</p>
-            <input type="text" tabindex="0" autofocus placeholder="Enter your name here" id="playerNameInput" maxlength="25" />
+            <p>agar5 <b>(NEW!)</b></p>
+            <input type="text" tabindex="0" autofocus placeholder="Nick" id="playerNameInput" maxlength="25" />
             <b class="input-error">Nick must be alphanumeric characters only!</b>
             <br />
             <a onclick="document.getElementById('spawn_cell').play();"><button id="startButton">Play</button></a>
             <button id="spectateButton">Spectate</button>
             <button id="settingsButton">Settings</button>
             <br />
+            <button id="startButton">Play</button>
+            <button onclick="window.location.href = 'skins.html'" id="skinsButton">Skins</button>
+            <button id="settingsButton"></button>
+            <br />
             <div id="settings">
-                <h3>Settings</h3>
-                <ul>
-                    <label><input id="visBord" type="checkbox">Show border</label>
-                    <label><input id="showMass" type="checkbox">Show mass</label>
-                    <br />
-                    <label><input id="continuity" type="checkbox">Continue moving when mouse is off-screen</label>
-                    <br />
+                    <label><input id="visBord" type="checkbox" checked>Show border</label>
+                    <label><input id="showMass" type="checkbox" checked>Show mass</label>
+                    <label><input id="continuity" type="checkbox" checked>Continuity</label>
                     <label><input id="roundFood" type="checkbox" checked>Rounded food</label>
-                    <label><input id="darkMode" type="checkbox">Toggle Dark Mode</label>
-                </ul>
             </div>
             <div id="instructions">
-                <h3>Gameplay</h3>
+                <hr>
                 <ul>
-                    <li>Move your mouse on the screen to move your character.</li>
-                    <li>Eat food and other players in order to grow your character (food respawns every time a player eats it).</li>
-                    <li>A player's mass is the number of food particles eaten.</li>
-                    <li>Objective: Try to get fat and eat other players.</li>
+                    <li>Move your mouse to control your cell.</li>
+                    <li>Eat other cells to grow bigger.</li>
+                    <li><small style="font-size:9px !important">user id: <span id="userid" style="font-size:9px !important"></span></small></li>
                 </ul>
+                <hr>
+
+                </hr>
             </div>
         </div>
     </div>
