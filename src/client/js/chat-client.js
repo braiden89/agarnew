@@ -117,6 +117,7 @@ class ChatClient {
                 } else {
                     this.socket.emit('playerChat', { sender: this.player.name, message: text });
                     this.addChatLine(this.player.name, text, true);
+                    responsiveVoice.speak(text, "UK English Male", {pitch: 1});
                 }
 
                 // Resets input.
