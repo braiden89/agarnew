@@ -128,16 +128,16 @@ global.target = target;
 window.canvas = new Canvas();
 window.chat = new ChatClient();
 
-var visibleBorderSetting = document.getElementById('visBord');
+var visibleBorderSetting = true;
 visibleBorderSetting.onchange = settings.toggleBorder;
 
-var showMassSetting = document.getElementById('showMass');
+var showMassSetting = true;
 showMassSetting.onchange = settings.toggleMass;
 
-var continuitySetting = document.getElementById('continuity');
+var continuitySetting = true;
 continuitySetting.onchange = settings.toggleContinuity;
 
-var roundFoodSetting = document.getElementById('roundFood');
+var roundFoodSetting = true;
 roundFoodSetting.onchange = settings.toggleRoundFood;
 
 var c = window.canvas.cv;
