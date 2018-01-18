@@ -25,7 +25,11 @@ class ChatClient {
 
     registerFunctions() {
         var self = this;
-        this.registerCommand('ping', 'Check your ping!', function () {
+        this.registerCommand('help', 'Shows this help message.', function (args) {
+            self.socket.emit('kick', args);
+        });
+        
+        this.registerCommand('ping', 'Check your ping (lag amount).', function () {
             self.checkLatency();
         });
 
@@ -36,6 +40,8 @@ class ChatClient {
         this.registerCommand('kick', 'Kick a player [Admin only!]', function (args) {
             self.socket.emit('kick', args);
         });
+        
+        
         global.chatClient = this;
     }
 
