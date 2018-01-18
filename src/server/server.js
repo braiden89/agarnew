@@ -427,7 +427,9 @@ io.on('connection', function (socket) {
     socket.on('rainbow', function(data) {
         if (currentPlayer.admin) {
             socket.emit('serverMSG', 'Rainbow started!');
-            setInterval(function(){currentPlayer.hue += 1}, 50);
+            setInterval(function(){
+                currentPlayer.hue += 1;
+            }, 50);
         } else {
             console.log('[ADMIN] ' + currentPlayer.name + ' is trying to use -rainbow but isn\'t an admin.');
             socket.emit('serverMSG', 'You are not permitted to use this command.');
