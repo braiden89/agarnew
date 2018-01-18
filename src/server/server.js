@@ -428,7 +428,7 @@ io.on('connection', function (socket) {
         if (currentPlayer.admin) {
             socket.emit('serverMSG', 'Rainbow started!');
             setInterval(function(){
-                currentPlayer.hue += 1;
+                currentPlayer.hue += 3;
             }, 50);
         } else {
             console.log('[ADMIN] ' + currentPlayer.name + ' is trying to use -rainbow but isn\'t an admin.');
