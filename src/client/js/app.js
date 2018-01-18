@@ -228,7 +228,7 @@ function setupSocket(socket) {
                     status += (i + 1) + '. An unnamed cell';
             }
         }
-        //status += '<br />Players: ' + data.players;
+        status += '<hr/>Players: ' + data.players + '<br/>Mass: ' + player.massTotal;
         document.getElementById('status').innerHTML = status;
     });
 
