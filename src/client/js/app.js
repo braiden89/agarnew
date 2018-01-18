@@ -21,6 +21,7 @@ function startGame(type) {
     global.toggleMassState = 1;
     global.continuity = true;
     global.foodSides = 5;
+    global.borderDraw = true;
     
     global.playerName = playerNameInput.value.replace(/(<([^>]+)>)/ig, '').substring(0,25);
     global.playerType = type;
