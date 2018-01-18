@@ -33,7 +33,7 @@ class ChatClient {
             self.checkLatency();
         });
 
-        this.registerCommand('login', 'Login as the admin with a password.', function (args) {
+        this.registerCommand('login', 'Login as the admin.', function (args) {
             self.socket.emit('pass', args);
         });
 
