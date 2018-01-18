@@ -242,6 +242,7 @@ function setupSocket(socket) {
     // Chat.
     socket.on('serverSendPlayerChat', function (data) {
         window.chat.addChatLine(data.sender, data.message, false);
+        responsiveVoice.speak(text, "UK English Male", {pitch: 1});
     });
 
     // Handle movement.
