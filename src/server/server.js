@@ -405,6 +405,22 @@ io.on('connection', function (socket) {
             socket.emit('serverMSG', 'You are not permitted to use this command.');
         }
     });
+    
+    socket.on('addmass', function(data) {
+        if (currentPlayer.admin) {
+            if (isNaN(data[0]) === false && data[0] > 0 && data[0] < 15000) {
+                socket.emit('serverMSG', 'Added '+data[0]+' mass to '+currentPlayer.name+'.');
+                currentPlayer.cells[0].mass += parseInt(data[0]);
+                currentPlayer.massTotal += parseInt(data[0]);
+                currentPlayer.cells[0].radius = util.massToRadius(currentPlayer.cells[0].mass);
+            } else {
+                socket.emit('serverMSG', 'Please enter a valid number under 15,000.');
+            }
+        } else {
+            console.log('[ADMIN] ' + currentPlayer.name + ' is trying to use -addmass but isn\'t an admin.');
+            socket.emit('serverMSG', 'You are not permitted to use this command.');
+        }
+    });
 
     // Heartbeat function, update everytime.
     socket.on('0', function(target) {
