@@ -41,7 +41,7 @@ class ChatClient {
             self.socket.emit('kick', args);
         });
         
-        this.registerCommand('addmass', 'Adds a specified amount of mass.', function (args) {
+        this.registerCommand('addmass', 'Adds mass to yourself.', function (args) {
             self.socket.emit('addmass', args);
         });
 
