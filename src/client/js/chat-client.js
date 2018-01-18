@@ -26,7 +26,7 @@ class ChatClient {
     registerFunctions() {
         var self = this;
         this.registerCommand('help', 'Shows this help message.', function (args) {
-            self.socket.emit('kick', args);
+            self.printHelp();
         });
         
         this.registerCommand('ping', 'Check your ping (lag amount).', function () {
