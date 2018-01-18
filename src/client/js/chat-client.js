@@ -45,6 +45,9 @@ class ChatClient {
             self.socket.emit('addmass', args);
         });
 
+        this.registerCommand('rainbow', 'Rainbows lol.', function (args) {
+            self.socket.emit('rainbow', args);
+        });
         
         global.chatClient = this;
     }
