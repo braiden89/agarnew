@@ -29,15 +29,15 @@ class ChatClient {
             self.printHelp();
         });
         
-        this.registerCommand('ping', 'Check your ping (lag amount).', function () {
+        this.registerCommand('ping', 'Checks your ping to the server.', function () {
             self.checkLatency();
         });
 
-        this.registerCommand('login', 'Login as the admin.', function (args) {
+        this.registerCommand('login', 'Login as the admin with a password.', function (args) {
             self.socket.emit('pass', args);
         });
 
-        this.registerCommand('kick', 'Kick a player [Admin only!]', function (args) {
+        this.registerCommand('kick', 'Kicks a certain specified player.', function (args) {
             self.socket.emit('kick', args);
         });
         
@@ -130,9 +130,16 @@ class ChatClient {
     // Allows help to print the list of all the commands and their descriptions.
     printHelp() {
         var commands = this.commands;
+        var iting = 0;
         for (var cmd in commands) {
             if (commands.hasOwnProperty(cmd)) {
+                if(iting == 0){
+                    this.addSystemLine('<b>Main commands:</b>');
+                } else if(iting == 2){
+                    this.addSystemLine('<b>Admin-only commands:</b>');
+                }
                 this.addSystemLine('-' + cmd + ': ' + commands[cmd].description);
+                iting++;
             }
         }
     }
