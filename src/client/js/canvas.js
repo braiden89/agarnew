@@ -141,7 +141,6 @@ class Canvas {
             this.parent.reenviar = false;
         }
         else if (key === global.KEY_SPLIT && this.parent.reenviar) {
-            document.getElementById('split_cell').play();
             this.parent.socket.emit('2');
             this.parent.reenviar = false;
         }
