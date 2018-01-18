@@ -25,39 +25,15 @@ class ChatClient {
 
     registerFunctions() {
         var self = this;
-        this.registerCommand('ping', 'Check your latency.', function () {
+        this.registerCommand('ping', 'Check your ping!', function () {
             self.checkLatency();
         });
 
-        this.registerCommand('dark', 'Toggle dark mode.', function () {
-            self.toggleDarkMode();
-        });
-
-        this.registerCommand('border', 'Toggle visibility of border.', function () {
-            self.toggleBorder();
-        });
-
-        this.registerCommand('mass', 'Toggle visibility of mass.', function () {
-            self.toggleMass();
-        });
-
-        this.registerCommand('continuity', 'Toggle continuity.', function () {
-            self.toggleContinuity();
-        });
-
-        this.registerCommand('roundfood', 'Toggle food drawing.', function (args) {
-            self.toggleRoundFood(args);
-        });
-
-        this.registerCommand('help', 'Information about the chat commands.', function () {
-            self.printHelp();
-        });
-
-        this.registerCommand('login', 'Login as an admin.', function (args) {
+        this.registerCommand('login', 'Login as the admin.', function (args) {
             self.socket.emit('pass', args);
         });
 
-        this.registerCommand('kick', 'Kick a player, for admins only.', function (args) {
+        this.registerCommand('kick', 'Kick a player [Admin only!]', function (args) {
             self.socket.emit('kick', args);
         });
         global.chatClient = this;
