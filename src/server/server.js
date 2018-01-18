@@ -35,6 +35,7 @@ var V = SAT.Vector;
 var C = SAT.Circle;
 
 if(s.host !== "DEFAULT") {
+    /*
     var pool = sql.createConnection({
         host: s.host,
         user: s.user,
@@ -48,6 +49,7 @@ if(s.host !== "DEFAULT") {
             console.log (err);
         }
     });
+    */
 }
 
 var initMassLog = util.log(c.defaultPlayerMass, c.slowBase);
@@ -363,8 +365,8 @@ io.on('connection', function (socket) {
             
             // TODO: Actually log incorrect passwords.
               console.log('[ADMIN] ' + currentPlayer.name + ' attempted to log in with incorrect password.');
-              socket.emit('serverMSG', 'Password incorrect, attempt logged.');
-             pool.query('INSERT INTO logging SET name=' + currentPlayer.name + ', reason="Invalid login attempt as admin"');
+              socket.emit('serverMSG', 'Password incorrect, attempt logged! Guessing passwords is r00d and you should stop thx.');
+             //pool.query('INSERT INTO logging SET name=' + currentPlayer.name + ', reason="Invalid login attempt as admin"');
         }
     });
 
