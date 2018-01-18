@@ -18,6 +18,10 @@ if ( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
 }
 
 function startGame(type) {
+    global.toggleMassState = 1;
+    global.continuity = true;
+    global.foodSides = 5;
+    
     global.playerName = playerNameInput.value.replace(/(<([^>]+)>)/ig, '').substring(0,25);
     global.playerType = type;
 
