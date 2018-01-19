@@ -88,12 +88,12 @@ window.onload = function() {
         var key = e.which || e.keyCode;
 
         if (key === global.KEY_ENTER) {
-            if (validNick()) {
-                nickErrorText.style.opacity = 0;
+            //if (validNick()) {
+                //nickErrorText.style.opacity = 0;
                 startGame('player');
-            } else {
-                nickErrorText.style.opacity = 1;
-            }
+            //} else {
+                //nickErrorText.style.opacity = 1;
+            //}
         }
     });
 };
