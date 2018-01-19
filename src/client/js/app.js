@@ -64,12 +64,12 @@ window.onload = function() {
     btn.onclick = function () {
 
         // Checks if the nick is valid.
-        if (validNick()) {
-            nickErrorText.style.opacity = 0;
+        //if (validNick()) {
+            //nickErrorText.style.opacity = 0;
             startGame('player');
-        } else {
-            nickErrorText.style.opacity = 1;
-        }
+        //} else {
+            //nickErrorText.style.opacity = 1;
+        //}
     };
 
     var settingsMenu = document.getElementById('settingsButton');
