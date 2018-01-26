@@ -1,5 +1,5 @@
 {
-  "name": "agar-clone",
+  "name": "agar5-new",
   "description": "A simple Agar.io clone",
   "scripts": {
     "build": "gulp build",
@@ -7,5 +7,5 @@
     "watch": "gulp watch",
     "test": "gulp test"
   },
-  "repository": "https://github.com/huytd/agar.io-clone"
+  "repository": "https://github.com/Finbae/agar5-new"
 }
