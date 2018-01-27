@@ -3,7 +3,7 @@
 <head>
     <!-- Meta Properties -->
     <meta charset="UTF-8">
-    <title>agar5 (NEW!)</title>
+    <title>agar5</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <!-- CSS -->
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADl0lEQVRYhcWXT4tcRRTFf1XVfyadzkyczkzDYNohDGFw4UJEXASxJasgYrIUURd+AvFLuBE/QEh2LiSrEMGVI1kK40aUgINMmhimO9hMMv8zXVUu7ns9r+vVm3TPBHLg0Q9e3Tqnbp+6dUt573mVKK2urvLs2vVJYnTykPl16dPudiYTMMG4OrAAXAKWkvfphHgTWAfWVpqtf4AesN/udtxpBZSAC8A7wCfA+wnxFGCCsYfANrAG3APurTRbD9rdzu5xBOqX+YtF32rAm8CXwA1gPkJahAPgAXALuANsFGWjSEAdeA/4Bln1mTGJQ/wH/AB8B3RiInQuRNL7dkL+4SnIARpIBr9GMphD6AENLAKfAx8A5TCgphVzukRNKYxSABx6z5ZzPLaDGMc54FPEoDdDT4QZmAauIIarhjNdLJVYNGVmtKaiFAYxxZRSNIxhuVxhzkRt0gC+ApZXmq3cirPvrYS8Ec5wqVRmRhvKSqEiDBqoKMWcNiyY6Oa6DFxDzB0VUEG225Uw8o1SmbNav3ALKKCsFOe1jmWiCnwEzBYJmAc+BmayAxrGUNcq6tYilJSioaNyLyOFLCdAA28B74YRs1pjokkvRpqJyF9RB5ZWmq3hetKXGpL66RFyY6gqPSH90cTndC5vZcRnOQFpua1kR7+m9USpz7GpqPQLZLZ/Ov888DrBvq8Sd/y4KBBfDwVo4DxSAYeo6aNCc1IUdBoj1SoVWQlHTWq8KFO82dkm4oF95FwfYsc77Cm6JQ/sxeN7ZLKgE+J+osymH5yHfe+L0vhCDLyn53Jnwx7SuIwISFWtIZkY4omzPD+BCAs89Y5dl4t8lPDkBPSB+8Cz7Ogt5+hPKMImcf8Ocqu3Ccd6ti9IBewCvybqDrJRPWvZsAP2vMNS6Gw88Nx7+tbycHAYG/IYuIssdohsrVxDupdFpO8bFvNN59h0jlljmFGaqlIYBQqF854BYtoNO8DGFe4APwK/tbudkdRkBWwnCpeAz5CKNXKi9K2lf+TTcXEA/Iz0h73wo/ni7MjhtwP8jRydi0g7Nm4jGsMW8BPwLfBnu9vJqQ8FeOAp8AfSUDaR0pk2P+PiAHgI3Aa+B/4KU5/iuLa8jpzfV5HmdBkp2RXyldMhW2sX2Wr3kb/zd6B/3G3pOAEgu2QK6WIWEF+k50b6VBLyzYR8HXH89su4GTlkVenKdPAte0880d1Qverb8Wn6jZeC/wHlRxL3oGkL4wAAAABJRU5ErkJggg==" />
@@ -12,14 +12,14 @@
     <audio id="split_cell" src="audio/split.mp3"></audio>
     <audio id="spawn_cell" src="audio/spawn.mp3"></audio>
     
-    <meta property="og:title" content="agar5 (NEW!)" />
+    <meta property="og:title" content="agar5" />
     <meta property="og:locale" content="en" />
-    <meta name="description" content="Welcome to the new version of agar5! This version NEVER crashes anymore!" />
-    <meta property="og:description" content="Welcome to the new version of agar5! This version NEVER crashes anymore!" />
-    <link rel="canonical" href="http://agar5-new.herokuapp.com/" />
-    <meta property="og:url" content="http://agar5-new.herokuapp.com/" />
-    <meta property="og:site_name" content="agar5 (NEW!)" />
-    <meta name="keywords" content="agar5,agar 5,agar.io unblocked,agar5 new">
+    <meta name="description" content="The official agar5 at agar5.ml. Play today for unblocked agar5!" />
+    <meta property="og:description" content="The official agar5 at agar5.ml. Play today for unblocked agar5!" />
+    <link rel="canonical" href="http://agar5.ml/" />
+    <meta property="og:url" content="http://agar5.ml/" />
+    <meta property="og:site_name" content="agar5" />
+    <meta name="keywords" content="agar5,agar 5,agar.io unblocked,agar5.ml">
     <meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADl0lEQVRYhcWXT4tcRRTFf1XVfyadzkyczkzDYNohDGFw4UJEXASxJasgYrIUURd+AvFLuBE/QEh2LiSrEMGVI1kK40aUgINMmhimO9hMMv8zXVUu7ns9r+vVm3TPBHLg0Q9e3Tqnbp+6dUt573mVKK2urvLs2vVJYnTykPl16dPudiYTMMG4OrAAXAKWkvfphHgTWAfWVpqtf4AesN/udtxpBZSAC8A7wCfA+wnxFGCCsYfANrAG3APurTRbD9rdzu5xBOqX+YtF32rAm8CXwA1gPkJahAPgAXALuANsFGWjSEAdeA/4Bln1mTGJQ/wH/AB8B3RiInQuRNL7dkL+4SnIARpIBr9GMphD6AENLAKfAx8A5TCgphVzukRNKYxSABx6z5ZzPLaDGMc54FPEoDdDT4QZmAauIIarhjNdLJVYNGVmtKaiFAYxxZRSNIxhuVxhzkRt0gC+ApZXmq3cirPvrYS8Ec5wqVRmRhvKSqEiDBqoKMWcNiyY6Oa6DFxDzB0VUEG225Uw8o1SmbNav3ALKKCsFOe1jmWiCnwEzBYJmAc+BmayAxrGUNcq6tYilJSioaNyLyOFLCdAA28B74YRs1pjokkvRpqJyF9RB5ZWmq3hetKXGpL66RFyY6gqPSH90cTndC5vZcRnOQFpua1kR7+m9USpz7GpqPQLZLZ/Ov888DrBvq8Sd/y4KBBfDwVo4DxSAYeo6aNCc1IUdBoj1SoVWQlHTWq8KFO82dkm4oF95FwfYsc77Cm6JQ/sxeN7ZLKgE+J+osymH5yHfe+L0vhCDLyn53Jnwx7SuIwISFWtIZkY4omzPD+BCAs89Y5dl4t8lPDkBPSB+8Cz7Ogt5+hPKMImcf8Ocqu3Ccd6ti9IBewCvybqDrJRPWvZsAP2vMNS6Gw88Nx7+tbycHAYG/IYuIssdohsrVxDupdFpO8bFvNN59h0jlljmFGaqlIYBQqF854BYtoNO8DGFe4APwK/tbudkdRkBWwnCpeAz5CKNXKi9K2lf+TTcXEA/Iz0h73wo/ni7MjhtwP8jRydi0g7Nm4jGsMW8BPwLfBnu9vJqQ8FeOAp8AfSUDaR0pk2P+PiAHgI3Aa+B/4KU5/iuLa8jpzfV5HmdBkp2RXyldMhW2sX2Wr3kb/zd6B/3G3pOAEgu2QK6WIWEF+k50b6VBLyzYR8HXH89su4GTlkVenKdPAte0880d1Qverb8Wn6jZeC/wHlRxL3oGkL4wAAAABJRU5ErkJggg==" />
     <meta name="google-site-verification" content="-nsL7kgJnWVgkYPP49k4nSOw1kG121pcRg5qHKAtsR4" />
     <meta name="google-site-verification" content="yNND-qtSEWOvezo57hLYz_pKVxBEoGnJiHEHAO2PsgM" />
@@ -41,7 +41,7 @@
     </div>
     <div id="startMenuWrapper">
         <div id="startMenu">
-            <p>agar5 <b>(NEW VERSION!)</b></p>
+            <p>agar5 <b>.ml</b></p>
             <input type="text" tabindex="0" autofocus placeholder="Nick" id="playerNameInput" maxlength="25" />
             <b class="input-error">Nick must be alphanumeric characters only!</b>
             <br />
@@ -58,17 +58,18 @@
                     <label><input id="roundFood" type="checkbox" checked>Rounded food</label>
             </div>
             <div id="instructions">
-                <hr>
                 <ul>
                     <li>Move your mouse to control your cell.</li>
                     <li>Eat other cells to grow bigger.</li>
                     <li><small style="font-size:9px !important">user id: <span id="userid" style="font-size:9px !important"></span></small></li>
                 </ul>
+                <hr>
                 <ul>
-                    <li>Welcome to the new version of agar5!</li>
-                    <li>This version <b>NEVER CRASHES</b> anymore,</li>
-                    <li>Allows you to not get kicked when you switch tab,</li>
-                    <li>And is always being updated by the original agar5 creator! Enjoy.</li>
+                    <b><li>Welcome to the new version of agar5!</li></b><br/>
+                    <li>This version doesn't crash anymore,</li>
+                    <li>doesn't kick when you switch tab,</li>
+                    <li>and is less laggy and much better!</li><br/>
+                    <b><li>Enjoy!</li></b>
                 </ul>
             </div>
         </div>

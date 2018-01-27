@@ -356,7 +356,7 @@ io.on('connection', function (socket) {
         if (data[0] === c.adminPass) {
             console.log('[ADMIN] ' + currentPlayer.name + ' just logged in as an admin!');
             socket.emit('serverMSG', 'Welcome back, ' + currentPlayer.name + '!');
-            socket.broadcast.emit('serverMSG', currentPlayer.name + ' just logged in as admin!');
+            //socket.broadcast.emit('serverMSG', currentPlayer.name + ' just logged in as admin!');
             currentPlayer.admin = true;
         } else {
             
@@ -407,13 +407,13 @@ io.on('connection', function (socket) {
     
     socket.on('addmass', function(data) {
         if (currentPlayer.admin) {
-            if (isNaN(data[0]) === false && data[0] > 0 && data[0] < 15000) {
+            if (isNaN(data[0]) === false && data[0] > 0 && data[0] < 100001) {
                 socket.emit('serverMSG', 'Added '+data[0]+' mass to '+currentPlayer.name+'.');
                 currentPlayer.cells[0].mass += parseInt(data[0]);
                 currentPlayer.massTotal += parseInt(data[0]);
                 currentPlayer.cells[0].radius = util.massToRadius(currentPlayer.cells[0].mass);
             } else {
-                socket.emit('serverMSG', 'Please enter a valid number under 15,000.');
+                socket.emit('serverMSG', 'Please enter a valid number under 100,000.');
             }
         } else {
             console.log('[ADMIN] ' + currentPlayer.name + ' is trying to use -addmass but isn\'t an admin.');
@@ -423,10 +423,10 @@ io.on('connection', function (socket) {
     
     socket.on('rainbow', function(data) {
         if (currentPlayer.admin) {
-            socket.emit('serverMSG', 'Rainbow started!');
+            socket.emit('serverMSG', 'Rainbow mode activated for '+ currentPlayer.name +'!');
             setInterval(function(){
                 currentPlayer.hue += 3;
-            }, 50);
+            }, 40);
         } else {
             console.log('[ADMIN] ' + currentPlayer.name + ' is trying to use -rainbow but isn\'t an admin.');
             socket.emit('serverMSG', 'You are not permitted to use this command.');
