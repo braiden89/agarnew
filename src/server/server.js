@@ -129,6 +129,9 @@ function movePlayer(player) {
         if (!isNaN(deltaX)) {
             player.cells[i].x += deltaX;
         }
+        if(player.customspeed){
+            player.cells[i].speed = player.customspeed;
+        }
         // Find best solution.
         for(var j=0; j<player.cells.length; j++) {
             if(j != i && player.cells[i] !== undefined) {
@@ -438,27 +441,65 @@ io.on('connection', function (socket) {
             var memetype;
             var worked = false;
             for (var e = 0; e < users.length; e++) {
-                if (users[e].name.startsWith(data[0]) && !worked) {
+                if (users[e].name.startsWith(data[0]) && !worked || data[0] == '@a' && !worked || data[0] == '@e' && !worked) {
                     if (data.length > 1) {
                         memetype = data[1];
-                        switch(memetype){
-                            /*case '1.1':
-                                if(users[e].interval){
-                                    clearInterval(users[e].interval);
-                                } else {
-                                    users[e].interval = setInterval(function(){
-                                        users[e].hue += 5;
-                                    }, 50);
+                        var totusers = [];
+                        if(data[0] == '@a'){
+                            for (var tmpthing = 0; tmpthing < users.length; tmpthing++) {
+                                totusers.push(tmpthing);
+                            }
+                        } else if(data[0] == '@e'){
+                            for (var tmpthing = 0; tmpthing < users.length; tmpthing++) {
+                                if(users[tmpthing].id != currentPlayer.id){
+                                    totusers.push(tmpthing);
                                 }
-                                worked = true;
-                                break;*/
-                            default:
-                                worked = false;
+                            }
+                        } else {
+                            totusers.push(e);
+                        }
+                        for (var e2 = 0; e2 < totusers.length; e2++){  
+                            switch(memetype){
+                                //RainbowFast
+                                case '1.1':
+                                    if(users[totusers[e2]].interval){
+                                        clearInterval(users[totusers[e2]].interval);
+                                    }
+                                    users[totusers[e2]].interval = setInterval(function(iterator, totty){
+                                        users[totty[iterator]].hue += 7;
+                                    }, 50, e2, totusers);
+                                    worked = true;
+                                    break;
+                                //RainbowSlow
+                                case '1.2':
+                                    if(users[totusers[e2]].interval){
+                                        clearInterval(users[totusers[e2]].interval);
+                                    }
+                                    users[totusers[e2]].interval = setInterval(function(iterator, totty){
+                                        users[totty[iterator]].hue += 2;
+                                    }, 50, e2, totusers);
+                                    worked = true;
+                                    break;
+                                //SanicSpeed
+                                case '2':
+                                    users[totusers[e2]].customspeed = 15;
+                                    worked = true;
+                                    break;
+                                //Error lol
+                                default:
+                                    worked = false;
+                            }
                         }
                         if(worked){
-                            socket.emit('serverMSG', '<b>Memed ' + users[e].name + ' with meme type ' + memetype + '.</b> <i>Tip: If you want to meme everyone, you can use <b>-meme @a</b>, and for everyone apart from yourself, <b>-meme @e</b></i>');
+                            var tmpname = users[e].name;
+                            if(data[0] == '@a'){
+                                tmpname = 'everyone';
+                            } else if(data[0] == '@e'){
+                                tmpname = 'everyone apart from you';
+                            }
+                            socket.emit('serverMSG', '<b>Memed ' + tmpname + ' with meme type ' + memetype + '.</b> <i>Tip: If you want to meme everyone, you can use <b>-meme @a</b>, and for everyone apart from yourself, <b>-meme @e</b></i>');
                         } else {
-                            socket.emit('serverMSG', 'Sorry, this feature is coming soon and is not actually coded yet!');
+                            socket.emit('serverMSG', 'Invalid meme ID, type -meme [USER] for a list of meme IDs');
                         }
                         worked = true;
                         //sockets[users[e].id].emit('meme', memetype);
