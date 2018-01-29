@@ -16,6 +16,10 @@ html, body, canvas {
     padding: 0;
 }
 
+canvas:focus{
+    outline:none;
+}
+
 div {
     -webkit-user-select: none; /* webkit (safari, chrome) browsers */
     -moz-user-select: none; /* mozilla browsers */
@@ -44,12 +48,11 @@ div {
 #status {
     position: absolute;
     padding: 10px;
-    background: rgba(0, 0, 0, 0.4);
-    color: #FFF;
+    background:rgba(35, 35, 35, 0.7);
+    color: #ccc;
     font-size: 16.1px;
     top: 10px;
     right: 10px;
-    font-weight: bold;
     text-align: center;
 }
 
@@ -66,12 +69,13 @@ div {
     position: absolute;
     width: 300px;
     height: 320px;
-    background: rgba(255, 255, 255, 0.7);
+    background:rgba(35, 35, 35, 0.7);
     bottom: 5px;
     left: 5px;
     border-radius: 5px;
     pointer-events: none;
     overflow-y:scroll;
+    overflow-x:hidden !important;
 }
 
 #instructions ul{
@@ -87,6 +91,8 @@ div {
     box-sizing: border-box;
     height: 285px;
     overflow-y:scroll !important;
+    overflow-x:hidden !important;
+    color:#ccc;
 }
 
 .chatbox .chat-list li {
@@ -103,7 +109,7 @@ div {
 }
 
 .chatbox .chat-list li.system {
-    color: #555555;
+    color: #666666;
 }
 
 .chatbox .chat-list li.system:before {
@@ -117,8 +123,9 @@ div {
     padding: 8px;
     background: transparent;
     border: none;
-    border-top: 1px solid #DDD;
+    border-top: 1px solid #444;
     outline: none;
+    color:#ccc;
 }
 #instructions{
     color:#777;

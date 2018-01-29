@@ -6,6 +6,7 @@ class ChatClient {
         this.socket = global.socket;
         this.mobile = global.mobile;
         this.player = global.player;
+        this.isadmin = false;
         var self = this;
         this.commands = {};
         var input = document.getElementById('chatInput');
@@ -25,29 +26,33 @@ class ChatClient {
 
     registerFunctions() {
         var self = this;
-        this.registerCommand('help', 'Shows this help message.', function (args) {
+        this.registerCommand('help', '', function (args) {
             self.printHelp();
-        });
+        }, false);
         
         this.registerCommand('ping', 'Checks your ping to the server.', function () {
             self.checkLatency();
-        });
+        }, false);
 
-        this.registerCommand('login', 'Login as the admin.', function (args) {
+        this.registerCommand('login', '', function (args) {
             self.socket.emit('pass', args);
-        });
+        }, true);
 
         this.registerCommand('kick', 'Kicks a certain specified player.', function (args) {
             self.socket.emit('kick', args);
-        });
+        }, true);
         
         this.registerCommand('addmass', 'Adds mass to yourself.', function (args) {
             self.socket.emit('addmass', args);
-        });
+        }, true);
 
         this.registerCommand('rainbow', 'Makes you rainbow coloured!', function (args) {
             self.socket.emit('rainbow', args);
-        });
+        }, true);
+
+        this.registerCommand('meme', 'Meme a specified player!', function (args) {
+            self.socket.emit('meme', args);
+        }, true);
         
         global.chatClient = this;
     }
@@ -76,6 +81,9 @@ class ChatClient {
         // Colours the chat input correctly.
         newline.className = 'system';
         newline.innerHTML = message;
+        if(message.includes("Welcome back,")){
+            this.isadmin = true;
+        }
 
         // Append messages to the logs.
         this.appendMessage(newline);
@@ -87,10 +95,11 @@ class ChatClient {
             return;
         }
         var chatList = document.getElementById('chatList');
-        if (chatList.childNodes.length > 10) {
-            chatList.removeChild(chatList.childNodes[0]);
-        }
+        //if (chatList.childNodes.length > 10) {
+        //    chatList.removeChild(chatList.childNodes[0]);
+        //}
         chatList.appendChild(node);
+        chatList.scrollTop = chatList.scrollHeight;
     }
 
     // Sends a message or executes a command on the click of enter.
@@ -110,7 +119,7 @@ class ChatClient {
                     if (commands[args[0]]) {
                         commands[args[0]].callback(args.slice(1));
                     } else {
-                        this.addSystemLine('Unrecognized Command: ' + text + ', type -help for more info.');
+                        this.addSystemLine('Unknown command: ' + text + ', type -help for more info.');
                     }
 
                 // Allows for regular messages to be sent to the server.
@@ -128,28 +137,38 @@ class ChatClient {
     }
 
     // Allows for addition of commands.
-    registerCommand(name, description, callback) {
+    registerCommand(name, description, callback, adminonly) {
         this.commands[name] = {
             description: description,
-            callback: callback
+            callback: callback,
+            adminonly: adminonly
         };
     }
 
     // Allows help to print the list of all the commands and their descriptions.
     printHelp() {
         var commands = this.commands;
-        var iting = 0;
+        console.log(this.isadmin);
+        this.addSystemLine('<hr style="border:0;border-top:1px solid #666;width:90%;margin:0;display:inline-block;vertical-align:middle;height:1px;" />');
+        if(!this.isadmin){
+            this.addSystemLine('<b style="text-decoration:underline">Main commands:</b>');
+        }  else {
+            this.addSystemLine('<b style="text-decoration:underline">Admin-only commands:</b>');
+        }
         for (var cmd in commands) {
             if (commands.hasOwnProperty(cmd)) {
-                if(iting == 0){
-                    this.addSystemLine('<b>Main commands:</b>');
-                } else if(iting == 2){
-                    this.addSystemLine('<b>Admin-only commands:</b>');
+                if(commands[cmd].adminonly){
+                    if(this.isadmin && commands[cmd].description != ''){
+                        this.addSystemLine('<b>-' + cmd + '</b>: <i>' + commands[cmd].description + '</i>');
+                    }
+                } else {
+                    if(!this.isadmin && commands[cmd].description != ''){
+                        this.addSystemLine('<b>-' + cmd + '</b>: <i>' + commands[cmd].description + '</i>');
+                    }
                 }
-                this.addSystemLine('-' + cmd + ': ' + commands[cmd].description);
-                iting++;
             }
         }
+        this.addSystemLine('<hr style="border:0;border-top:1px solid #666;width:90%;margin:0;display:inline-block;vertical-align:middle;height:1px;" />');
     }
 
     checkLatency() {

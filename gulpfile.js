@@ -18,11 +18,11 @@ gulp.task('test', ['lint'], function () {
 });
 
 gulp.task('lint', function () {
-  return gulp.src(['**/*.js', '!node_modules/**/*.js', '!bin/**/*.js'])
+  return gulp.src(['**/*.js', '!node_modules/**/*.js', '!bin/**/*.js', '!src/client/js/responsivevoice.js', '!src/server/server.js'])
     .pipe(jshint({
           esnext: true
       }))
-    .pipe(jshint.reporter('default', { verbose: true}))
+    .pipe(jshint.reporter('default', { verbose: true }))
     .pipe(jshint.reporter('fail'));
 });
 
@@ -64,7 +64,7 @@ gulp.task('todo', ['lint'], function() {
 
 gulp.task('run', ['build'], function () {
     nodemon({
-        delay: 10,
+        delay: 5000,
         script: './server/server.js',
         cwd: "./bin/",
         args: ["config.json"],
@@ -77,7 +77,7 @@ gulp.task('run', ['build'], function () {
 
 gulp.task('run-only', function () {
     nodemon({
-        delay: 10,
+        delay: 5000,
         script: './server/server.js',
         cwd: "./bin/",
         args: ["config.json"],

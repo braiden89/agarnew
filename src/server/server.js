@@ -20,6 +20,8 @@ var quadtree = require('simple-quadtree');
 //call sqlinfo
 var s = c.sqlinfo;
 
+var memejson = require('../client/js/memejson.js');
+
 var tree = quadtree(0, 0, c.gameWidth, c.gameHeight);
 
 var users = [];
@@ -362,7 +364,7 @@ io.on('connection', function (socket) {
             
             // TODO: Actually log incorrect passwords.
               console.log('[ADMIN] ' + currentPlayer.name + ' attempted to log in with incorrect password.');
-              socket.emit('serverMSG', 'Password incorrect, attempt logged! Guessing passwords is r00d and you should stop thx.');
+              socket.emit('serverMSG', 'Password incorrect, attempt logged!');
              //pool.query('INSERT INTO logging SET name=' + currentPlayer.name + ', reason="Invalid login attempt as admin"');
         }
     });
@@ -372,7 +374,7 @@ io.on('connection', function (socket) {
             var reason = '';
             var worked = false;
             for (var e = 0; e < users.length; e++) {
-                if (users[e].name === data[0] && !users[e].admin && !worked) {
+                if (users[e].name.startsWith(data[0]) && !users[e].admin && !worked) {
                     if (data.length > 1) {
                         for (var f = 1; f < data.length; f++) {
                             if (f === data.length) {
@@ -424,11 +426,67 @@ io.on('connection', function (socket) {
     socket.on('rainbow', function(data) {
         if (currentPlayer.admin) {
             socket.emit('serverMSG', 'Rainbow mode activated for '+ currentPlayer.name +'!');
-            setInterval(function(){
-                currentPlayer.hue += 3;
-            }, 40);
+            
         } else {
             console.log('[ADMIN] ' + currentPlayer.name + ' is trying to use -rainbow but isn\'t an admin.');
+            socket.emit('serverMSG', 'You are not permitted to use this command.');
+        }
+    });
+
+    socket.on('meme', function(data) {
+        if (currentPlayer.admin) {
+            var memetype;
+            var worked = false;
+            for (var e = 0; e < users.length; e++) {
+                if (users[e].name.startsWith(data[0]) && !worked) {
+                    if (data.length > 1) {
+                        memetype = data[1];
+                        switch(memetype){
+                            /*case '1.1':
+                                if(users[e].interval){
+                                    clearInterval(users[e].interval);
+                                } else {
+                                    users[e].interval = setInterval(function(){
+                                        users[e].hue += 5;
+                                    }, 50);
+                                }
+                                worked = true;
+                                break;*/
+                            default:
+                                worked = false;
+                        }
+                        if(worked){
+                            socket.emit('serverMSG', '<b>Memed ' + users[e].name + ' with meme type ' + memetype + '.</b> <i>Tip: If you want to meme everyone, you can use <b>-meme @a</b>, and for everyone apart from yourself, <b>-meme @e</b></i>');
+                        } else {
+                            socket.emit('serverMSG', 'Sorry, this feature is coming soon and is not actually coded yet!');
+                        }
+                        worked = true;
+                        //sockets[users[e].id].emit('meme', memetype);
+                    } else {
+                        socket.emit('serverMSG', '<hr style="border:0;border-top:1px solid #666;width:90%;margin:0;display:inline-block;vertical-align:middle;height:1px;" />');
+                        socket.emit('serverMSG', '<b style="text-decoration:underline">Meme types:</b>');
+
+                        var tmpmsg = '';
+                        for (var memething in memejson.memetypes) {
+                            var curmeme = memejson.memetypes[memething];
+                            if(curmeme.visible){
+                                tmpmsg += `#${curmeme.id}-<i>${curmeme.name}</i>, `;
+                            }
+                        }
+                        socket.emit('serverMSG', tmpmsg);
+
+                        socket.emit('serverMSG', '<hr style="border:0;border-top:1px solid #666;width:90%;margin:0;display:inline-block;vertical-align:middle;height:1px;" />');
+                        socket.emit('serverMSG', '<b>Run the command again with -meme [USER] [MEMETYPE], e.g. -meme Bob 1</b>');
+                        worked = true;
+                    }
+                    
+                }
+            }
+            if (!worked) {
+                socket.emit('serverMSG', 'Could not locate that user.');
+            }
+        } else {
+            console.log('[ADMIN] ' + currentPlayer.name + ' is trying to use -meme but isn\'t an admin.');
             socket.emit('serverMSG', 'You are not permitted to use this command.');
         }
     });
@@ -465,7 +523,7 @@ io.on('connection', function (socket) {
                     x: currentPlayer.cells[i].x,
                     y: currentPlayer.cells[i].y,
                     radius: util.massToRadius(masa),
-                    speed: 25
+                    speed: 30
                 });
             }
         }
@@ -620,12 +678,8 @@ function tickPlayer(currentPlayer) {
         currentCell.radius = util.massToRadius(currentCell.mass);
         playerCircle.r = currentCell.radius;
 
-        tree.clear();
-        users.forEach(tree.put);
         var playerCollisions = [];
-
-        var otherUsers =  tree.get(currentPlayer, check);
-
+        users.forEach(check);
         playerCollisions.forEach(collisionCheck);
     }
 }

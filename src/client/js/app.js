@@ -22,6 +22,8 @@ function startGame(type) {
     global.continuity = true;
     global.foodSides = 5;
     global.borderDraw = true;
+    global.backgroundColor = '#181818';
+    global.lineColor = '#aaaaaa';
     
     global.playerName = playerNameInput.value.replace(/(<([^>]+)>)/ig, '').substring(0,25);
     global.playerType = type;
@@ -29,7 +31,7 @@ function startGame(type) {
     global.screenWidth = window.innerWidth;
     global.screenHeight = window.innerHeight;
 
-    document.getElementById('startMenuWrapper').style.maxHeight = '0px';
+    document.getElementById('startMenuWrapper').style.display = 'none';
     document.getElementById('gameAreaWrapper').style.opacity = 1;
     if (!socket) {
         socket = io({query:"type=" + type});
@@ -278,7 +280,7 @@ function setupSocket(socket) {
         global.died = true;
         window.setTimeout(function() {
             document.getElementById('gameAreaWrapper').style.opacity = 0;
-            document.getElementById('startMenuWrapper').style.maxHeight = '1000px';
+            document.getElementById('startMenuWrapper').style.display = 'block';
             global.died = false;
             if (global.animLoopHandle) {
                 window.cancelAnimationFrame(global.animLoopHandle);
@@ -537,13 +539,15 @@ function animloop() {
 
 function gameLoop() {
     if (global.died) {
-        graph.fillStyle = '#333333';
+        graph.fillStyle = '#000000';
+        graph.globalAlpha = 0.7;
         graph.fillRect(0, 0, global.screenWidth, global.screenHeight);
-
+        graph.globalAlpha = 1;
         graph.textAlign = 'center';
-        graph.fillStyle = '#FFFFFF';
-        graph.font = 'bold 30px sans-serif';
+        graph.fillStyle = '#CCCCCC';
+        graph.font = '42px Roboto';
         graph.fillText('You died!', global.screenWidth / 2, global.screenHeight / 2);
+        window.cancelAnimationFrame(global.animLoopHandle);
     }
     else if (!global.disconnected) {
         if (global.gameStart) {
@@ -576,33 +580,34 @@ function gameLoop() {
             socket.emit('0', window.canvas.target); // playerSendTarget "Heartbeat".
 
         } else {
-            graph.fillStyle = '#333333';
-            graph.fillRect(0, 0, global.screenWidth, global.screenHeight);
-
+            graph.fillStyle = '#000000';
             graph.textAlign = 'center';
-            graph.fillStyle = '#FFFFFF';
-            graph.font = 'bold 30px sans-serif';
-            graph.fillText('Game Over!', global.screenWidth / 2, global.screenHeight / 2);
+            graph.fillStyle = '#CCCCCC';
+            graph.font = '42px Roboto';
+            graph.fillText('Loading...', global.screenWidth / 2, global.screenHeight / 2);
         }
     } else {
-        graph.fillStyle = '#333333';
+        graph.fillStyle = '#000000';
+        graph.globalAlpha = 0.7;
+        //graph.clearRect(0, 0, global.screenWidth, global.screenHeight);
         graph.fillRect(0, 0, global.screenWidth, global.screenHeight);
-
+        graph.globalAlpha = 1;
         graph.textAlign = 'center';
-        graph.fillStyle = '#FFFFFF';
-        graph.font = 'bold 30px sans-serif';
+        graph.fillStyle = '#CCCCCC';
+        graph.font = '42px Roboto';
         if (global.kicked) {
             if (reason !== '') {
-                graph.fillText('You were kicked for:', global.screenWidth / 2, global.screenHeight / 2 - 20);
-                graph.fillText(reason, global.screenWidth / 2, global.screenHeight / 2 + 20);
+                graph.fillText('You were kicked for:', global.screenWidth / 2, global.screenHeight / 2 - 25);
+                graph.fillText(reason, global.screenWidth / 2, global.screenHeight / 2 + 25);
             }
             else {
                 graph.fillText('You were kicked!', global.screenWidth / 2, global.screenHeight / 2);
             }
         }
         else {
-              graph.fillText('Disconnected!', global.screenWidth / 2, global.screenHeight / 2);
+              graph.fillText('OOF, the server crashed.', global.screenWidth / 2, global.screenHeight / 2);
         }
+        window.cancelAnimationFrame(global.animLoopHandle);
     }
 }
 
