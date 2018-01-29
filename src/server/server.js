@@ -62,15 +62,17 @@ function addFood(toAdd) {
     var radius = util.massToRadius(c.foodMass);
     while (toAdd--) {
         var position = c.foodUniformDisposition ? util.uniformPosition(food, radius) : util.randomPosition(radius);
-        food.push({
-            // Make IDs unique.
-            id: ((new Date()).getTime() + '' + food.length) >>> 0,
-            x: position.x,
-            y: position.y,
-            radius: radius,
-            mass: Math.random() + 2,
-            hue: Math.round(Math.random() * 360)
-        });
+        if(position){
+            food.push({
+                // Make IDs unique.
+                id: ((new Date()).getTime() + '' + food.length) >>> 0,
+                x: position.x,
+                y: position.y,
+                radius: radius,
+                mass: Math.random() + 2,
+                hue: Math.round(Math.random() * 360)
+            });
+        }
     }
 }
 
