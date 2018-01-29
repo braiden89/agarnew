@@ -466,7 +466,9 @@ io.on('connection', function (socket) {
                                         clearInterval(users[totusers[e2]].interval);
                                     }
                                     users[totusers[e2]].interval = setInterval(function(iterator, totty){
-                                        users[totty[iterator]].hue += 7;
+                                        if(users[totty[iterator]]){
+                                            users[totty[iterator]].hue += 7;
+                                        }
                                     }, 50, e2, totusers);
                                     worked = true;
                                     break;
@@ -476,7 +478,9 @@ io.on('connection', function (socket) {
                                         clearInterval(users[totusers[e2]].interval);
                                     }
                                     users[totusers[e2]].interval = setInterval(function(iterator, totty){
-                                        users[totty[iterator]].hue += 2;
+                                        if(users[totty[iterator]]){
+                                            users[totty[iterator]].hue += 2;
+                                        }
                                     }, 50, e2, totusers);
                                     worked = true;
                                     break;
