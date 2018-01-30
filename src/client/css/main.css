@@ -6,7 +6,8 @@
 
 html, body {
     background-image: url("../img/bg.png");
-    overflow:hidden;
+    background-repeat: no-repeat;
+    background-size: auto;
 }
 
 html, body, canvas {
