@@ -46,10 +46,6 @@ class ChatClient {
             self.socket.emit('addmass', args);
         }, true);
 
-        this.registerCommand('rainbow', 'Makes you rainbow coloured!', function (args) {
-            self.socket.emit('rainbow', args);
-        }, true);
-
         this.registerCommand('meme', 'Meme a specified player!', function (args) {
             self.socket.emit('meme', args);
         }, true);

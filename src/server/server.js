@@ -427,16 +427,6 @@ io.on('connection', function (socket) {
             socket.emit('serverMSG', 'You are not permitted to use this command.');
         }
     });
-    
-    socket.on('rainbow', function(data) {
-        if (currentPlayer.admin) {
-            socket.emit('serverMSG', 'Rainbow mode activated for '+ currentPlayer.name +'!');
-            
-        } else {
-            console.log('[ADMIN] ' + currentPlayer.name + ' is trying to use -rainbow but isn\'t an admin.');
-            socket.emit('serverMSG', 'You are not permitted to use this command.');
-        }
-    });
 
     socket.on('meme', function(data) {
         if (currentPlayer.admin) {
@@ -487,8 +477,13 @@ io.on('connection', function (socket) {
                                     worked = true;
                                     break;
                                 //SanicSpeed
-                                case '2':
+                                case '2.1':
                                     users[totusers[e2]].customspeed = 15;
+                                    worked = true;
+                                    break;
+                                //ParfittSpeed
+                                case '2.2':
+                                    users[totusers[e2]].customspeed = 0.001;
                                     worked = true;
                                     break;
                                 //Error lol
