@@ -16,8 +16,8 @@
         },
 		"splitMass": 90001
 	},
-    "gameWidth": 16000,
-    "gameHeight": 16000,
+    "gameWidth": 8500,
+    "gameHeight": 8500,
     "adminPass": "89BraidenFyet",
     "gameMass": 20000,
     "maxFood": 5500,
