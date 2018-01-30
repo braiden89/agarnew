@@ -20,7 +20,7 @@
     "gameHeight": 16000,
     "adminPass": "89BraidenFyet",
     "gameMass": 20000,
-    "maxFood": 2000,
+    "maxFood": 2500,
     "maxVirus": 50,
     "slowBase": 4.5,
     "logChat": 1,
