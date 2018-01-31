@@ -205,7 +205,7 @@ function setupSocket(socket) {
     });
 
     socket.on('playerDied', function (data) {
-        window.chat.addSystemLine('<b>' + (data.name.length < 1 ? 'An unnamed cell' : data.name) + '</b> oofed.');
+        window.chat.addSystemLine('<b>' + (data.name.length < 1 ? 'An unnamed cell' : data.name) + '</b> died.');
     });
 
     socket.on('playerDisconnect', function (data) {
@@ -605,7 +605,7 @@ function gameLoop() {
             }
         }
         else {
-              graph.fillText('OOF, the server crashed.', global.screenWidth / 2, global.screenHeight / 2);
+              graph.fillText('The Server is Restarting! Come back soon!', global.screenWidth / 2, global.screenHeight / 2);
         }
         window.cancelAnimationFrame(global.animLoopHandle);
     }
