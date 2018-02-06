@@ -31,7 +31,7 @@
     "newPlayerInitialPosition": "farthest",
     "massLossRate": 1,
     "minMassLoss": 50,
-    "mergeTimer": 14,
+    "mergeTimer": 17,
     "sqlinfo":{
       "connectionLimit": 100,
       "host": "DEFAULT",
