@@ -94,7 +94,7 @@ div {
     height: 285px;
     overflow-y:scroll !important;
     overflow-x:hidden !important;
-    color:#ccc;
+    color:#d9dbd4;
 }
 
 .chatbox .chat-list {
@@ -112,11 +112,11 @@ div {
 }
 
 .chatbox .chat-list li.me b {
-    color: #ea6153;
+    color: #43ff00;
 }
 
 .chatbox .chat-list li.friend b {
-    color: #2ecc71;
+    color: #00ffe5;
 }
 
 .chatbox .chat-list li.system {
