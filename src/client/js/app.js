@@ -22,8 +22,8 @@ function startGame(type) {
     global.continuity = true;
     global.foodSides = 5;
     global.borderDraw = true;
-    global.backgroundColor = '#f2fbff';
-    global.lineColor = '#000000';
+    global.backgroundColor = '#181818';
+    global.lineColor = '#aaaaaa';
     
     global.playerName = playerNameInput.value.replace(/(<([^>]+)>)/ig, '').substring(0,25);
     global.playerType = type;
