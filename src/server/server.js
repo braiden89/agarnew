@@ -23,6 +23,10 @@ var s = c.sqlinfo;
 var memejson = require('../client/js/memejson.js');
 
 var tree = quadtree(0, 0, c.gameWidth, c.gameHeight);
+/*
+var passport = require('passport'),
+    GoogleStrategy = require('passport-google-oauth2').Strategy;
+*/
 
 var users = [];
 var massFood = [];
@@ -56,7 +60,32 @@ if(s.host !== "DEFAULT") {
 
 var initMassLog = util.log(c.defaultPlayerMass, c.slowBase);
 
-app.use(express.static(__dirname + '/../client'));
+app.use(
+    express.static(__dirname + '/../client')
+);
+app.get("/online.json", function (req, res) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    res.send('{ "players": '+users.length+' }');
+});
+/*
+passport.use(new GoogleStrategy({
+        clientID:     process.env.gClientID,
+        clientSecret: process.env.gClientSe,
+        callbackURL: "http://localhost:3000/oauth2callback.html",
+        passReqToCallback: true
+    },
+    function(request, accessToken, refreshToken, profile, done) {
+        console.log(profile);
+    }
+));
+
+app.get("/googlelogin.html", passport.authenticate('google', {scope: ['profile','email']}));
+app.get("/oauth2callback.html", passport.authenticate('google', { failureRedirect: '/'}),
+function(req, res) {
+    res.redirect('/');
+});*/
 
 function addFood(toAdd) {
     var radius = util.massToRadius(c.foodMass);
@@ -356,7 +385,7 @@ io.on('connection', function (socket) {
         if (c.logChat === 1) {
             console.log('[CHAT] [' + (new Date()).getHours() + ':' + (new Date()).getMinutes() + '] ' + _sender + ': ' + _message);
         }
-        socket.broadcast.emit('serverSendPlayerChat', {sender: _sender, message: _message.substring(0,35)});
+        socket.broadcast.emit('serverSendPlayerChat', {sender: _sender, message: _message.substring(0,50)});
     });
 
     socket.on('pass', function(data) {
@@ -452,16 +481,24 @@ io.on('connection', function (socket) {
                         }
                         for (var e2 = 0; e2 < totusers.length; e2++){  
                             switch(memetype){
+                                //MEMERESET
+                                case '0':
+                                    if(users[totusers[e2]].interval){
+                                        clearInterval(users[totusers[e2]].interval);
+                                    }
+                                    users[totusers[e2]].customspeed = false;
+                                    worked = true;
+                                    break;
                                 //RainbowFast
                                 case '1.1':
                                     if(users[totusers[e2]].interval){
                                         clearInterval(users[totusers[e2]].interval);
                                     }
-                                    users[totusers[e2]].interval = setInterval(function(iterator, totty){
-                                        if(users[totty[iterator]]){
-                                            users[totty[iterator]].hue += 7;
+                                    users[totusers[e2]].interval = setInterval(function(finalid){
+                                        if(users[users.findIndex(usearch => usearch.id == finalid)]){
+                                            users[users.findIndex(usearch => usearch.id == finalid)].hue += 7;
                                         }
-                                    }, 50, e2, totusers);
+                                    }, 50, users[totusers[e2]].id);
                                     worked = true;
                                     break;
                                 //RainbowSlow
@@ -469,11 +506,11 @@ io.on('connection', function (socket) {
                                     if(users[totusers[e2]].interval){
                                         clearInterval(users[totusers[e2]].interval);
                                     }
-                                    users[totusers[e2]].interval = setInterval(function(iterator, totty){
-                                        if(users[totty[iterator]]){
-                                            users[totty[iterator]].hue += 2;
+                                    users[totusers[e2]].interval = setInterval(function(finalid){
+                                        if(users[users.findIndex(usearch => usearch.id == finalid)]){
+                                            users[users.findIndex(usearch => usearch.id == finalid)].hue += 7;
                                         }
-                                    }, 50, e2, totusers);
+                                    }, 50, users[totusers[e2]].id);
                                     worked = true;
                                     break;
                                 //SanicSpeed
@@ -481,9 +518,41 @@ io.on('connection', function (socket) {
                                     users[totusers[e2]].customspeed = 15;
                                     worked = true;
                                     break;
-                                //ParfittSpeed
+                                //ParfittPace
                                 case '2.2':
                                     users[totusers[e2]].customspeed = 0.001;
+                                    worked = true;
+                                    break;
+                                //MSG
+                                case '3.1':
+                                    var tosend = '';
+                                    if (data.length > 2) {
+                                        for (var f = 2; f < data.length; f++) {
+                                            if (f === data.length) {
+                                                tosend = tosend + data[f];
+                                            }
+                                            else {
+                                                tosend = tosend + data[f] + ' ';
+                                            }
+                                        }
+                                    }
+                                    io.emit('bigMSG', tosend, users[totusers[e2]].id, 0);
+                                    worked = true;
+                                    break;
+                                //MSGRainbow
+                                case '3.2':
+                                    var tosend = '';
+                                    if (data.length > 2) {
+                                        for (var f = 2; f < data.length; f++) {
+                                            if (f === data.length) {
+                                                tosend = tosend + data[f];
+                                            }
+                                            else {
+                                                tosend = tosend + data[f] + ' ';
+                                            }
+                                        }
+                                    }
+                                    io.emit('bigMSG', tosend, users[totusers[e2]].id, 1);
                                     worked = true;
                                     break;
                                 //Error lol
