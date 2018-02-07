@@ -21,7 +21,7 @@
     "adminPass": "niggercAnnon2318312731",
     "gameMass": 20000,
     "maxFood": 2800,
-    "maxVirus": 0,
+    "maxVirus": 20,
     "slowBase": 4.5,
     "logChat": 1,
     "networkUpdateFactor": 40,
