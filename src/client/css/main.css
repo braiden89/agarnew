@@ -97,6 +97,15 @@ div {
     color:#ccc;
 }
 
+.chatbox .chat-list {
+    padding: 5px;
+    margin: 0;
+    list-style: none;
+    box-sizing: border-box;
+    height: 285px;
+    overflow-y:scroll !important;
+}
+
 .chatbox .chat-list li {
     padding: 2px;
     margin: 3px;
@@ -111,7 +120,8 @@ div {
 }
 
 .chatbox .chat-list li.system {
-    color: #666666;
+    color: #9b59b6;
+    font-style: italic;
 }
 
 .chatbox .chat-list li.system:before {
@@ -125,10 +135,10 @@ div {
     padding: 8px;
     background: transparent;
     border: none;
-    border-top: 1px solid #444;
+    border-top: 1px solid #DDD;
     outline: none;
-    color:#ccc;
 }
+
 #instructions{
     color:#777;
     text-align:center;
