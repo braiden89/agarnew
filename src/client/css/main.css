@@ -120,12 +120,12 @@ div {
 }
 
 .chatbox .chat-list li.system {
-    color: #9b59b6;
-    font-style: italic;
+    color: #ff0019;
+    font-style: bold;
 }
 
 .chatbox .chat-list li.system:before {
-    content: "» ";
+    content: "->";
 }
 
 .chatbox .chat-input {
