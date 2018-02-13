@@ -1,7 +1,7 @@
 {
-  "name": "agar-clone",
+  "name": "fyet-clone",
   "version": "1.0.0",
-  "description": "A simple Agar.io clone",
+  "description": "A simple fyet",
   "main": "server/server.js",
   "scripts": {
     "build": "gulp build",
